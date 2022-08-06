@@ -268,7 +268,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 05182d9d8c06eaf41848f878ca1ed692, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -5.14
+      value: -4.99
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 05182d9d8c06eaf41848f878ca1ed692, type: 3}
       propertyPath: m_LocalRotation.w
@@ -2199,7 +2199,7 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.9377947, y: 0.8424298, z: 1.7067239}
   m_Center: {x: -0.023954868, y: 0.43713185, z: 0.103156686}
---- !u!114 &1881834394
+--- !u!114 &1881834395
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -2208,7 +2208,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1881834391}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 23fc3c7900bef0c4083e5e865d787bfc, type: 3}
+  m_Script: {fileID: 11500000, guid: 0419a98043ff50e4187d93b77ae05d0e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1001 &1901299520

@@ -1,12 +1,10 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 
-public class Drag3D : MonoBehaviour
+public class DragCar : MonoBehaviour
 {
-
     private Vector3 _objectMouseOffset;
     private float _objectZcoords;
 
@@ -23,13 +21,17 @@ public class Drag3D : MonoBehaviour
 
         return Camera.main.ScreenToWorldPoint(mouseWorldPoint);
     }
+
+    private Vector3 GetAxisDragPosition()
+    {
+        var mouseProjection = GetMouseWorldPos() + _objectMouseOffset;
+        var position = transform.position;
+        return new Vector3(mouseProjection.x, position.y, position.z);
+    }
     
     private void OnMouseDrag()
     {
-        transform.position = GetMouseWorldPos() + _objectMouseOffset;
-        //Vector3 mousePosition = Input.mousePosition;
-        //transform.position = new Vector3(mousePosition.x, mousePosition.y, transform.position.z);
+        transform.position = GetAxisDragPosition();
     }
 
-    
 }

@@ -12,8 +12,8 @@ public class SwipeDetection : MonoBehaviour
 {
     private Vector2 _swipeStartPosition;
     private Vector2 _swipeEndPosition;
-    public Direction SwipeDirection;
-    
+    public Direction swipeDirection;
+    [SerializeField] private CarMove carMove;
     
     // Start is called before the first frame update
     void Start()
@@ -36,9 +36,7 @@ public class SwipeDetection : MonoBehaviour
     {
         _swipeEndPosition = Input.mousePosition;
         Debug.Log(AngleToDireciton());
-        //Debug.Log(GetSwipeAngle());
-        //Debug.Log("End " + _swipeEndPosition);
-        //Debug.Log("Start " + _swipeStartPosition);
+        carMove.MoveOrder(AngleToDireciton());
     }
 
     private float GetSwipeAngle()

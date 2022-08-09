@@ -1,5 +1,7 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.CompilerServices;
 using UnityEditor.UIElements;
 using UnityEngine;
 
@@ -20,21 +22,22 @@ public class CarMove : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        if (transform.position.y is 90 or -90)
+        if (transform.rotation.y is 90 or -90)
         {
             _carAlignment = CarAlignment.Vertical;
         }
-        else if (transform.position.y is 0 or 180)
+        else if (transform.rotation.y is 0 or 180)
         {
             _carAlignment = CarAlignment.Horizontal;
         }
+
+        _movementVector = new Vector3(0, 0, 0);
     }
 
     // Update is called once per frame
     void Update()
     {
-        var position = transform.position;
-        transform.position += new(position.x, position.y, position.z);
+        transform.position += _movementVector;
     }
 
     private CarAlignment DirectionToAlignment(Direction swipeDirection)
@@ -47,4 +50,43 @@ public class CarMove : MonoBehaviour
         }
         else return CarAlignment.Error;
     }
+
+    private Vector3 VectorFromDirection(Direction direction)
+    {
+        if (direction == Direction.Down)
+        {
+            return new Vector3(-speed, 0, 0);
+        }
+        else if (direction == Direction.Up)
+        {
+            return new Vector3(speed, 0, 0);
+        }
+        else if (direction == Direction.Right)
+        {
+            return new Vector3(0, 0, -speed);
+        }
+        else if (direction == Direction.Left)
+        {
+            return new Vector3(0, 0, speed);
+        }
+        else return Vector3.zero;
+    }
+    
+    public void MoveOrder(Direction direction)
+    {
+        if (_carAlignment == DirectionToAlignment(direction))
+        {
+            _movementVector = VectorFromDirection(direction);
+        }
+        else
+        {
+            Shake();
+        }
+    }
+
+    private void Shake()
+    {
+        Debug.Log("SHAKE!");
+    }
+
 }

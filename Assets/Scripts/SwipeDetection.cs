@@ -14,6 +14,7 @@ public class SwipeDetection : MonoBehaviour
     private Vector2 _swipeEndPosition;
     public Direction SwipeDirection;
     
+    
     // Start is called before the first frame update
     void Start()
     {

@@ -5,12 +5,8 @@ using UnityEngine;
 
 public class CarStop : MonoBehaviour
 {
-
-    [SerializeField] private CarMove carMove;
     void OnCollisionEnter(Collision collision)
     {
-        carMove.Stop();
-
         CarMove otherCar = collision.collider.gameObject.GetComponent<CarMove>();
 
         if (otherCar != null)

@@ -175,5 +175,10 @@ public class CarMove : MonoBehaviour
             transform.rotation *= Quaternion.Euler(0, 90, 0);
             _movementVector = transform.forward;
         }
+        if (other.name == "ConveyorFlip")
+        {
+            transform.rotation *= Quaternion.Euler(0, -90, 0);
+            _movementVector = transform.forward;
+        }
     }
 }

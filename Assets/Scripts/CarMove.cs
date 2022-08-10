@@ -12,11 +12,13 @@ public class CarMove : MonoBehaviour
     [SerializeField] private float speed = 0.5f;
     private CarAlignment _carAlignment;
     private Vector3 _movementVector;
+    private Rigidbody _rigidbody;
 
 
     // Start is called before the first frame update
     void Start()
     {
+        _rigidbody = GetComponent<Rigidbody>();
         SetCarAlignment();
         _movementVector = new Vector3(0, 0, 0);
     }
@@ -24,7 +26,8 @@ public class CarMove : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        transform.position += _movementVector;
+        //transform.position += _movementVector;
+        _rigidbody.velocity = _movementVector;
     }
 
     private CarAlignment DirectionToAlignment(Direction swipeDirection)
@@ -78,7 +81,7 @@ public class CarMove : MonoBehaviour
 
     public void Stop()
     {
-        _movementVector = new Vector3(0, 0, 0);
+        _movementVector = Vector3.zero;
     }
 
     private void OnMouseUp()

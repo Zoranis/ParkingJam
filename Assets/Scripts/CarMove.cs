@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 public enum CarAlignment
@@ -11,6 +12,7 @@ public class CarMove : MonoBehaviour
 {
     [SerializeField] private float speed = 0.5f;
     private CarAlignment _carAlignment;
+    private Direction _carDirection;
     private Vector3 _movementVector;
     private Rigidbody _rigidbody;
 
@@ -20,7 +22,8 @@ public class CarMove : MonoBehaviour
     {
         _rigidbody = GetComponent<Rigidbody>();
         SetCarAlignment();
-        _movementVector = new Vector3(0, 0, 0);
+        SetCarDirection();
+        _movementVector = Vector3.zero;
     }
 
     // Update is called once per frame
@@ -39,6 +42,37 @@ public class CarMove : MonoBehaviour
             return CarAlignment.Horizontal;
         }
         else return CarAlignment.Error;
+    }
+
+    private float DirectionToAngle(Direction direction)
+    {
+        if (direction == Direction.Left)
+            return 0;
+        else if (direction == Direction.Up)
+            return 90;
+        else if (direction == Direction.Right)
+            return 180;
+        else if (direction == Direction.Down)
+            return 270;
+
+        else return -1;
+    }
+
+    private Vector3 VectorFromDirectionCompare(Direction direction)
+    {
+        if (direction == _carDirection)
+        {
+            return transform.forward;
+        }
+
+        float targetAngle = DirectionToAngle(direction);
+        float carAngle = DirectionToAngle(_carDirection);
+
+        if (Math.Abs(targetAngle - carAngle) == 180)
+            return transform.forward * -1;
+
+
+        else return Vector3.zero;
     }
 
     private Vector3 VectorFromDirection(Direction direction)
@@ -66,7 +100,7 @@ public class CarMove : MonoBehaviour
     {
         if (_carAlignment == DirectionToAlignment(direction))
         {
-            _movementVector = VectorFromDirection(direction);
+            _movementVector = VectorFromDirectionCompare(direction);
         }
         else
         {
@@ -102,5 +136,33 @@ public class CarMove : MonoBehaviour
         {
             _carAlignment = CarAlignment.Horizontal;
         }
+    }
+
+    private void SetCarDirection()
+    {
+        int rotation = (int)transform.rotation.eulerAngles.y;
+        if (rotation == 0)
+        {
+            _carDirection = Direction.Left;
+        }
+        else if (rotation == 90)
+        {
+            _carDirection = Direction.Up;
+        }
+        else if (rotation == 180)
+        {
+            _carDirection = Direction.Right;
+        }
+        else if (rotation == 270)
+        {
+            _carDirection = Direction.Down;
+        }
+    }
+
+    private void Turn()
+    {
+        Vector3 originalPosition = _movementVector;
+        Vector3 targetPosition = Vector3.right * speed;
+        _movementVector = Vector3.Lerp(originalPosition, targetPosition, Time.deltaTime);
     }
 }

@@ -30,7 +30,7 @@ public class CarMove : MonoBehaviour
     void Update()
     {
         //transform.position += _movementVector;
-        _rigidbody.velocity = _movementVector;
+        _rigidbody.velocity = _movementVector * speed;
     }
 
     private CarAlignment DirectionToAlignment(Direction swipeDirection)
@@ -164,5 +164,16 @@ public class CarMove : MonoBehaviour
         Vector3 originalPosition = _movementVector;
         Vector3 targetPosition = Vector3.right * speed;
         _movementVector = Vector3.Lerp(originalPosition, targetPosition, Time.deltaTime);
+    }
+
+    void OnTriggerExit(Collider currentCollider)
+    {
+        GameObject other = currentCollider.gameObject;
+
+        if (other.name == "Conveyor")
+        {
+            transform.rotation *= Quaternion.Euler(0, 90, 0);
+            _movementVector = transform.forward;
+        }
     }
 }

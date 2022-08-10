@@ -71,7 +71,7 @@ public class CarMove : MonoBehaviour
         }
         else return Vector3.zero;
     }
-    
+
     public void MoveOrder(Direction direction)
     {
         if (_carAlignment == DirectionToAlignment(direction))
@@ -89,4 +89,8 @@ public class CarMove : MonoBehaviour
         Debug.Log("SHAKE!");
     }
 
+    public void Stop()
+    {
+        _movementVector = new Vector3(0, 0, 0);
+    }
 }

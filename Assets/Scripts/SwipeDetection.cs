@@ -12,7 +12,7 @@ public class SwipeDetection : MonoBehaviour
 {
     private Vector2 _swipeStartPosition;
     private Vector2 _swipeEndPosition;
-    public Direction swipeDirection;
+    [NonSerialized] public Direction SwipeDirection;
     [SerializeField] private CarMove carMove;
     
     // Start is called before the first frame update

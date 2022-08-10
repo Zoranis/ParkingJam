@@ -35,7 +35,7 @@ public class SwipeDetection : MonoBehaviour
     private void OnMouseUp()
     {
         _swipeEndPosition = Input.mousePosition;
-        Debug.Log(AngleToDireciton());
+        //Debug.Log(AngleToDireciton());
         carMove.MoveOrder(AngleToDireciton());
     }
 

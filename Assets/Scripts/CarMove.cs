@@ -22,15 +22,7 @@ public class CarMove : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        if (transform.rotation.y is 90 or -90)
-        {
-            _carAlignment = CarAlignment.Vertical;
-        }
-        else if (transform.rotation.y is 0 or 180)
-        {
-            _carAlignment = CarAlignment.Horizontal;
-        }
-
+        SetCarAlignment();
         _movementVector = new Vector3(0, 0, 0);
     }
 
@@ -86,11 +78,31 @@ public class CarMove : MonoBehaviour
 
     private void Shake()
     {
-        Debug.Log("SHAKE!");
+        //Debug.Log("SHAKE!");
     }
 
     public void Stop()
     {
         _movementVector = new Vector3(0, 0, 0);
+    }
+
+    private void OnMouseUp()
+    {
+        SetCarAlignment();
+        Debug.Log(_carAlignment);
+    }
+
+    private void SetCarAlignment()
+    {
+        float rotation = transform.rotation.eulerAngles.y;
+        //Debug.Log("Rotation Y: " + transform.rotation.eulerAngles.y);
+        if (rotation is 90 or -90)
+        {
+            _carAlignment = CarAlignment.Vertical;
+        }
+        else if (rotation is 0 or 180)
+        {
+            _carAlignment = CarAlignment.Horizontal;
+        }
     }
 }

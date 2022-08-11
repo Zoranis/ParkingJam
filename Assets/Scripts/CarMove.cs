@@ -29,7 +29,6 @@ public class CarMove : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //transform.position += _movementVector;
         _rigidbody.velocity = _movementVector * speed;
     }
 
@@ -75,43 +74,14 @@ public class CarMove : MonoBehaviour
         else return Vector3.zero;
     }
 
-    private Vector3 VectorFromDirection(Direction direction)
-    {
-        if (direction == Direction.Down)
-        {
-            return new Vector3(-speed, 0, 0);
-        }
-        else if (direction == Direction.Up)
-        {
-            return new Vector3(speed, 0, 0);
-        }
-        else if (direction == Direction.Right)
-        {
-            return new Vector3(0, 0, -speed);
-        }
-        else if (direction == Direction.Left)
-        {
-            return new Vector3(0, 0, speed);
-        }
-        else return Vector3.zero;
-    }
-
     public void MoveOrder(Direction direction)
     {
         if (_carAlignment == DirectionToAlignment(direction))
         {
             _movementVector = VectorFromDirectionCompare(direction);
         }
-        else
-        {
-            Shake();
-        }
     }
 
-    private void Shake()
-    {
-        //Debug.Log("SHAKE!");
-    }
 
     public void Stop()
     {
@@ -159,13 +129,6 @@ public class CarMove : MonoBehaviour
         }
     }
 
-    private void Turn()
-    {
-        Vector3 originalPosition = _movementVector;
-        Vector3 targetPosition = Vector3.right * speed;
-        _movementVector = Vector3.Lerp(originalPosition, targetPosition, Time.deltaTime);
-    }
-
     void OnTriggerExit(Collider currentCollider)
     {
         GameObject other = currentCollider.gameObject;
@@ -175,6 +138,7 @@ public class CarMove : MonoBehaviour
             transform.rotation *= Quaternion.Euler(0, 90, 0);
             _movementVector = transform.forward;
         }
+
         if (other.name == "ConveyorFlip")
         {
             transform.rotation *= Quaternion.Euler(0, -90, 0);

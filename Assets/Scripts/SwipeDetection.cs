@@ -13,18 +13,6 @@ public class SwipeDetection : MonoBehaviour
     [NonSerialized] public Direction SwipeDirection;
     [SerializeField] private CarMove carMove;
     
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-    
     public void OnMouseDown()
     {
         _swipeStartPosition = Input.mousePosition;
@@ -33,7 +21,6 @@ public class SwipeDetection : MonoBehaviour
     private void OnMouseUp()
     {
         _swipeEndPosition = Input.mousePosition;
-        //Debug.Log(AngleToDireciton());
         carMove.MoveOrder(AngleToDireciton());
     }
 
